@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'dart:typed_data';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,10 +48,24 @@ class _MyHomePage extends State<MyHomePage> {
   Uint8List? data;
   img.Image? photo;
 
+  bool flag = false;
+
+////////////////////////////////////
+  File? _imageFile;
+  String _status = '';
+  bool _imgLoading = false;
+  ImagePicker? _imagePicker;
+
   @override
   void initState() {
+    super.initState();
     image = Image.asset('images/dummy.png');
+
     pallete = image!.image;
+/////////////////////////////////////
+    _status = '';
+    _imgLoading = false;
+    _imagePicker = ImagePicker();
   }
 
   @override
@@ -59,12 +74,45 @@ class _MyHomePage extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Image Picker'),
       ),
-      body: Center(
+      body:
+/*
+      Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            _imgLoading ? CircularProgressIndicator() :
+            null == _imageFile
+                ? Container()
+                : Expanded(
+              child: Image.file(
+                File(_imageFile!.path),
+                filterQuality: FilterQuality.high,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(_status),
+            SizedBox(
+              height: 20,
+            )
+          ],
+        ),
+      ),
+
+*/
+          Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             ImageDisPlay(),
             image!,
+            Stack(
+              children: <Widget>[
+                Image.asset('images/dummy.png'),
+                Container(width: 120, height: 121, color: flag ? paletteGenerator!.lightMutedColor!.color.withOpacity(0.8) : Colors.black.withOpacity(0.5)),
+              ],
+            ),
             FloatingActionButton(
               onPressed: updatePaletteGenerator,
               tooltip: 'PalletteGen',
@@ -76,21 +124,92 @@ class _MyHomePage extends State<MyHomePage> {
               child: const Icon(Icons.add_a_photo),
             ),
             FloatingActionButton(
-              onPressed: getImageFromGallery,
+              onPressed: _loadImage,//getImageFromGallery,
               tooltip: 'Pick Image',
               child: const Icon(Icons.wallpaper),
             ),
             TextButton(
               onPressed: () {
-                  GetPixel();
+                GetPixel();
+//              _select();
               },
-//              tooltip: 'Pick Image',
               child: const Text('임시로'),
             ),
           ],
         ),
       ),
     );
+  }
+
+////////////////////////////////////////
+  _select() {
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      width: MediaQuery.of(context).size.width,
+      color: Colors.black12,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _button('Camera', ImageSource.camera),
+          _button('gallery', ImageSource.gallery),
+        ],
+      ),
+    );
+  }
+
+  _button(String text, ImageSource imageSource) {
+    return FlatButton(
+      child: Text(text),
+      onPressed: () async {
+        setState(() {
+          _imgLoading = true;
+          _imageFile = null;
+        });
+        File? file = null;//await _loadImage();
+        setState(() {
+          _imageFile = file as File?;
+          _imgLoading = false;
+          _status = 'Error';
+        });
+        return;
+        setState(() {
+          _imageFile = null;
+          _imgLoading = false;
+          _status = 'Error';
+        });
+      },
+    );
+  }
+
+  Future<File?> _loadImage() async {
+//    PickedFile? file = await _imagePicker?.getImage(source: imageSource);
+
+    final ImagePicker _picker = ImagePicker();
+    final image1 = await _picker.pickImage(source: ImageSource.gallery, maxWidth: 160, maxHeight: 160);
+
+    File? mFile;
+    if (null != image1) {
+      Directory directory = await getTemporaryDirectory();
+//      Map map = Map();
+//      map['path'] = image.path;
+//      map['directory'] = directory;
+//      mFile = await compute(_saveImageToDisk, map);
+
+      File tempFile = File(image1.path!);
+      img.Image? image = img.decodeImage(tempFile.readAsBytesSync());
+      img.Image mImage = img.copyResize(image!, width: 140, height: 140);
+      String imgType = image1.path!.split('.').last;
+      String mPath = '${directory.path.toString()}/image_${DateTime.now()}.$imgType';
+      File dFile = File(mPath);
+      if (imgType == 'jpg' || imgType == 'jpeg') {
+        dFile.writeAsBytesSync(img.encodeJpg(mImage));
+      } else {
+        dFile.writeAsBytesSync(img.encodePng(mImage));
+      }
+    }
+    return mFile;
   }
 
   getImageFromCam() async {
@@ -114,7 +233,7 @@ class _MyHomePage extends State<MyHomePage> {
   }
 
   updatePaletteGenerator() async {
-    var _paletteGenerator = await PaletteGenerator.fromImageProvider(
+    paletteGenerator = await PaletteGenerator.fromImageProvider(
       pallete!,
       size: Size(120, 120),
       region: const Rect.fromLTWH(0, 0, 2, 2),
@@ -122,13 +241,15 @@ class _MyHomePage extends State<MyHomePage> {
     );
 
     if (kDebugMode) {
-      print(_paletteGenerator.colors.length);
+      print(paletteGenerator!.colors.length);
     }
     if (kDebugMode) {
-      print(_paletteGenerator);
+      print(paletteGenerator!);
     }
 
-    setState(() {});
+    setState(() {
+      flag = true;
+    });
   }
 
   Widget Pallete() {
@@ -156,7 +277,6 @@ class _MyHomePage extends State<MyHomePage> {
 
 //    img.decodeImage(_bytes);
 
-
 //    List<int> values = data!.buffer.asUint8List();
     photo = null;
 //    photo = img.decodeImage(values);
@@ -168,11 +288,11 @@ class _MyHomePage extends State<MyHomePage> {
     photo!.setPixel(0, 0, 0xff000000);
     int pixel32 = photo!.getPixelSafe(px.toInt(), py.toInt());
 
-
     int hex = abgrToArgb(pixel32);
     if (kDebugMode) {
-      print('Value of int: ${hex.toRadixString(16)}');
+      print('Value of int: $_bytes');
     }
+
     return Color(hex);
   }
 
@@ -209,11 +329,30 @@ class _MyHomePage extends State<MyHomePage> {
                     print(_image!.path);
                   }
 
+                  Directory directory = getTemporaryDirectory() as Directory;
+
                   String temp = _image!.path;
                   var a = temp.length;
                   temp.replaceRange(a - 6, a - 5, 'tt');
                   print(temp);
                   File(temp).writeAsStringSync;
+
+
+
+
+                  File tempFile = File(_image!.path);
+                  img.Image? image = img.decodeImage(tempFile.readAsBytesSync());
+                  img.Image mImage = img.copyResize(image!, width: 512);
+                  String imgType = _image!.path.split('.').last;
+                  String mPath = '${directory.path.toString()}/image_${DateTime.now()}.$imgType';
+                  File dFile = File(mPath);
+                  if (imgType == 'jpg' || imgType == 'jpeg') {
+                    dFile.writeAsBytesSync(img.encodeJpg(mImage));
+                  } else {
+                    dFile.writeAsBytesSync(img.encodePng(mImage));
+                  }
+//                  return dFile;
+
                   return
 //                  Text('path: ${snapshot.data!.path}');
                       Image.file(File(_image!.path), width: 100, height: 100);
@@ -228,6 +367,27 @@ class _MyHomePage extends State<MyHomePage> {
               }
             }),
       );
+    }
+  }
+
+  Future<File?> _saveImageToDisk(Map map) async {
+    try {
+      String path = map['path'];
+      Directory directory = map['directory'];
+      File tempFile = File(path);
+      img.Image? image = img.decodeImage(tempFile.readAsBytesSync());
+      img.Image mImage = img.copyResize(image!, width: 512);
+      String imgType = path.split('.').last;
+      String mPath = '${directory.path.toString()}/image_${DateTime.now()}.$imgType';
+      File dFile = File(mPath);
+      if (imgType == 'jpg' || imgType == 'jpeg') {
+        dFile.writeAsBytesSync(img.encodeJpg(mImage));
+      } else {
+        dFile.writeAsBytesSync(img.encodePng(mImage));
+      }
+      return dFile;
+    } catch (e) {
+      return null;
     }
   }
 }

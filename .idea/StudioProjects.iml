@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/dynamic_links-main/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/dynamic_links-main/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/dynamic_links-main/build" />
+      <excludeFolder url="file://$MODULE_DIR$/tapjoytest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/tapjoytest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/tapjoytest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/webviewtest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/webviewtest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/webviewtest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/firsttest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/firsttest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/firsttest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/dropboxtest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/dropboxtest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/dropboxtest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/unityadstest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/unityadstest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/unityadstest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/cliprecttest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/cliprecttest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/cliprecttest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/gridviewtest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/gridviewtest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/gridviewtest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/inapppurchasetest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/inapppurchasetest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/inapppurchasetest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/imagepicker/build" />
+      <excludeFolder url="file://$MODULE_DIR$/imagepicker/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/imagepicker/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/painttest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/painttest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/painttest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Youtube-Flutter-Tutorials-main/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Youtube-Flutter-Tutorials-main/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Youtube-Flutter-Tutorials-main/build" />
+      <excludeFolder url="file://$MODULE_DIR$/tabtest/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/tabtest/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/tabtest/build" />
+      <excludeFolder url="file://$MODULE_DIR$/exam/build" />
+      <excludeFolder url="file://$MODULE_DIR$/exam/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/exam/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pngpixel/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pngpixel/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/pngpixel/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pngcreate/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/pngcreate/build" />
+      <excludeFolder url="file://$MODULE_DIR$/pngcreate/.pub" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
