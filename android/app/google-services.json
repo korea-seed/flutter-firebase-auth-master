@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "93583705666",
+    "firebase_url": "https://k-pop-starpic-dev-c7b16-default-rtdb.firebaseio.com",
+    "project_id": "k-pop-starpic-dev-c7b16",
+    "storage_bucket": "k-pop-starpic-dev-c7b16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93583705666:android:314b4a0a0c633e7c130fdb",
+        "android_client_info": {
+          "package_name": "com.example.firebase_auth_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93583705666-th633lf8d5an5vg6pfli66c3bahoobl0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebase_auth_demo",
+            "certificate_hash": "a642429a0c6c990f85f8c75a6955fcbfa0b6b5b4"
+          }
+        },
+        {
+          "client_id": "93583705666-tmp3hgipgg6cb33iukl5h8gtt5017rqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD05Brwwm_SWBZmn2Af4ZEKFG_xWZi84V4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93583705666-tmp3hgipgg6cb33iukl5h8gtt5017rqk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "93583705666-4f4k55b1ensgsleo98dddjmrfin1jr9m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "metastar.kpopstar.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
